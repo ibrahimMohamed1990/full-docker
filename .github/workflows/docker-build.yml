@@ -1,0 +1,27 @@
+
+name: Docker Build CI
+
+on:
+  push:
+    branches:
+      - master
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Docker Images
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Show Docker Version
+        run: docker --version
+
+      - name: Build Backend Image
+        run: docker compose build backend
+
+      - name: Build Frontend Image
+        run: docker compose build frontend
